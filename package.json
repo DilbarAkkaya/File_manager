@@ -2,10 +2,11 @@
   "name": "file_manager",
   "version": "1.0.0",
   "description": "File Manager",
-  "main": "index.js",
+  "type": "module",
+  "main": "index.mjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm run start -- --username=your_username"
+    "start": "node index.mjs"
   },
   "author": "Dilbar Akkaya",
   "license": "ISC"
