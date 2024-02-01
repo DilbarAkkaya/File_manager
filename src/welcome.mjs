@@ -5,7 +5,8 @@ const welcome = (username = 'Guest') => {
       username = args[i].slice(11);
     }
   }
-  console.log(`Welcome to the File Manager, ${username}!`);
+  return username;
+  //console.log(`Welcome to the File Manager, ${username}!`);
 }
 
 export default welcome;
