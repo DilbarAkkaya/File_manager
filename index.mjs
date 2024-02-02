@@ -2,6 +2,7 @@ import welcome from "./src/welcome.mjs";
 import readline from "node:readline/promises";
 import { stdin, stdout } from "process";
 import { logCurrentDirectory } from "./src/logCurrentDirectory.mjs";
+import { setHomeDirectory } from "./src/setHomeDirectory.mjs";
 
 const app = async () => {
   try {
@@ -23,8 +24,9 @@ const app = async () => {
       }
     });
   } catch (error) {
-      console.error("Please try again, an error occured:", error);
-      logCurrentDirectory();
+    console.error("Please try again, an error occured:", error);
+    logCurrentDirectory();
+  }
 }
-}
+setHomeDirectory();
 await app();
