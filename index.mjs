@@ -15,6 +15,7 @@ const app = async () => {
       logCurrentDirectory();
     })
     lineInterface.on("line", (line) => {
+      logCurrentDirectory();
       if (line === ".exit") {
         console.log(`Thank you for using File Manager, ${username}, goodbye!`);
         lineInterface.close();
