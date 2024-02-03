@@ -1,13 +1,17 @@
 import welcome from "./src/welcome.mjs";
 import readline from "node:readline/promises";
+import path from "path";
 import { stdin, stdout } from "process";
 import { logCurrentDirectory } from "./src/logCurrentDirectory.mjs";
 import { setHomeDirectory } from "./src/setHomeDirectory.mjs";
+import up from "./src/up.mjs";
 
 const app = async () => {
   try {
+    setHomeDirectory();
     const username = welcome();
     console.log(`Welcome to the File Manager, ${username}!`);
+    up()
     logCurrentDirectory();
     const lineInterface = readline.createInterface({ input: stdin, output: stdout });
     lineInterface.setPrompt('\x1b[95mPlease, enter command >> \x1b[0m');
@@ -32,5 +36,5 @@ const app = async () => {
     logCurrentDirectory();
   }
 }
-setHomeDirectory();
+
 await app();
