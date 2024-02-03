@@ -10,6 +10,8 @@ const app = async () => {
     console.log(`Welcome to the File Manager, ${username}!`);
     logCurrentDirectory();
     const lineInterface = readline.createInterface({ input: stdin, output: stdout });
+    lineInterface.setPrompt('\x1b[95mPlease, enter command >> \x1b[0m');
+    lineInterface.prompt()
     lineInterface.on("SIGINT", () => {
       console.log(`\nThank you for using File Manager, ${username}, goodbye!`);
       lineInterface.close();
@@ -17,6 +19,8 @@ const app = async () => {
     })
     lineInterface.on("line", (line) => {
       logCurrentDirectory();
+      lineInterface.setPrompt('\x1b[95mPlease, enter command >> \x1b[0m');
+      lineInterface.prompt();
       if (line === ".exit") {
         console.log(`Thank you for using File Manager, ${username}, goodbye!`);
         lineInterface.close();
