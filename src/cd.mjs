@@ -13,7 +13,7 @@ const cd = (inputPath) => {
 
     } else {
       process.chdir(absoluteInputPath);
-      console.log(`You are moved to ${absoluteInputPath}`);
+      console.log(` You are moved to ${absoluteInputPath}`);
 
     }
 
@@ -22,6 +22,5 @@ const cd = (inputPath) => {
     console.log(`Operation failed: ${err}`);
  
   }
-  logCurrentDirectory();
 }
 export default cd;

@@ -12,7 +12,6 @@ const app = async () => {
     setHomeDirectory();
     const username = welcome();
     console.log(`Welcome to the File Manager, ${username}!`);
- 
     logCurrentDirectory();
     const lineInterface = readline.createInterface({ input: stdin, output: stdout });
     lineInterface.setPrompt('\x1b[95mPlease, enter command >> \x1b[0m');
@@ -20,25 +19,30 @@ const app = async () => {
     lineInterface.on("SIGINT", () => {
       console.log(`\nThank you for using File Manager, ${username}, goodbye!`);
       lineInterface.close();
-      logCurrentDirectory();
+      //logCurrentDirectory();
     })
     lineInterface.on("line", (line) => {
-      logCurrentDirectory();
+      //logCurrentDirectory();
 
       if (line.startsWith("cd")) {
         const inputPath = line.slice(3).trim();
         cd(inputPath);
+       // logCurrentDirectory();
       }
       if (line.startsWith("up")) {
         up();
+
       }
       if (line === ".exit") {
         console.log(`Thank you for using File Manager, ${username}, goodbye!`);
         lineInterface.close();
-        logCurrentDirectory();
       }
       lineInterface.setPrompt('\x1b[95m>> \x1b[0m');
+      logCurrentDirectory();
       lineInterface.prompt();
+    });
+    lineInterface.on("close", () => {
+      logCurrentDirectory();
     });
   } catch (error) {
     console.error("Please try again, an error occured:", error);
