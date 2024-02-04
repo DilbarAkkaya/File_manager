@@ -7,14 +7,14 @@ const copy = async (filePath, targetDirectory) => {
     await fs.access(filePath, fs.constants.R_OK);
     const absoluteFilePath = path.resolve(filePath);
     const fileName = path.basename(absoluteFilePath);
-    const targetPath = path.join(targetDirectory, fileName);
+    const targetPath = path.join(path.resolve(targetDirectory), fileName);
     await fs.access(targetDirectory, fs.constants.W_OK);
     try {
       await fs.access(targetPath, fs.constants.F_OK);
-      console.error(`File ${fileName} already exists in ${targetDirectory}`);
+      console.error(`File ${fileName} already exists in ${path.resolve(targetDirectory)}`);
       return;
     } catch (err) {
-      const readStream = createReadStream(filePath);
+      const readStream = createReadStream(absoluteFilePath);
       const writeStream = createWriteStream(targetPath);
       writeStream.on('error', (err) => {
         console.error('File writing error:', err);
@@ -22,7 +22,7 @@ const copy = async (filePath, targetDirectory) => {
       readStream.pipe(writeStream);
       await new Promise((resolve, reject) => {
         readStream.on('end', () => {
-          console.log(`File ${fileName} copied from ${filePath} to ${targetPath} successfully `);
+          console.log(`File ${fileName} copied from ${path.resolve(filePath)} to ${targetPath} successfully `);
           resolve();
         });
         readStream.on('error', (err) => {
