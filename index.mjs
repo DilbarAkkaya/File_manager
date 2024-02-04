@@ -11,6 +11,7 @@ import add from "./src/add.mjs";
 import rename from "./src/rename.mjs";
 import copy from "./src/copy.mjs";
 import move from "./src/move.mjs";
+import remove from "./src/remove.mjs";
 
 const app = async () => {
   try {
@@ -75,6 +76,14 @@ const app = async () => {
                 case "mv":
                 try {
                  await move(partsOfLine[1], partsOfLine[2]);
+                } catch (error) {
+                  console.error(`Operation failed: ${error}`);
+                }
+                break;
+                case "rm":
+                  const fileToDelete = line.slice(3).trim();
+                try {
+                 await remove(fileToDelete);
                 } catch (error) {
                   console.error(`Operation failed: ${error}`);
                 }
