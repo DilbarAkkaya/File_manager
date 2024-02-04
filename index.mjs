@@ -10,6 +10,7 @@ import cat from "./src/cat.mjs";
 import add from "./src/add.mjs";
 import rename from "./src/rename.mjs";
 import copy from "./src/copy.mjs";
+import move from "./src/move.mjs";
 
 const app = async () => {
   try {
@@ -27,6 +28,7 @@ const app = async () => {
     })
 
     lineInterface.on("line", async (line) => {
+      const partsOfLine = line.split(' ');
       switch (line.split(' ')[0]) {
         case "up":
           up();
@@ -64,9 +66,15 @@ const app = async () => {
               }
               break;
               case "cp":
-                const partsOfLine = line.split(' ');
                 try {
                  await copy(partsOfLine[1], partsOfLine[2]);
+                } catch (error) {
+                  console.error(`Operation failed: ${error}`);
+                }
+                break;
+                case "mv":
+                try {
+                 await move(partsOfLine[1], partsOfLine[2]);
                 } catch (error) {
                   console.error(`Operation failed: ${error}`);
                 }
