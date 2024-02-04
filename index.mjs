@@ -8,6 +8,7 @@ import cd from "./src/cd.mjs";
 import ls from "./src/ls.mjs";
 import cat from "./src/cat.mjs";
 import add from "./src/add.mjs";
+import rename from "./src/rename.mjs";
 
 
 const app = async () => {
@@ -53,6 +54,15 @@ const app = async () => {
               console.error(`Operation failed: ${error}`);
             }
             break;
+            case "rn":
+              const arrOfArgs = line.split(' ');
+              const newFileName = arrOfArgs[2];
+              try {
+                await rename(arrOfArgs[1], newFileName);
+              } catch (error) {
+                console.error(`Operation failed: ${error}`);
+              }
+              break;
         case ".exit":
           console.log(`Thank you for using File Manager, ${username}, goodbye!`);
           lineInterface.close();
