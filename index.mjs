@@ -6,6 +6,7 @@ import { setHomeDirectory } from "./src/setHomeDirectory.mjs";
 import up from "./src/up.mjs";
 import cd from "./src/cd.mjs";
 import ls from "./src/ls.mjs";
+import cat from "./src/cat.mjs";
 
 const app = async () => {
   try {
@@ -31,9 +32,17 @@ const app = async () => {
           const inputPath = line.slice(3).trim();
           await cd(inputPath);
           break;
-          case "ls":
-            ls();
-            break;
+        case "ls":
+          ls();
+          break;
+        case "cat":
+          const input = line.slice(4).trim();
+          try {
+            await cat(input);
+          } catch (error) {
+            console.error(`Operation failed: ${err}`);
+          }
+          break;
         case ".exit":
           console.log(`Thank you for using File Manager, ${username}, goodbye!`);
           lineInterface.close();
@@ -50,9 +59,9 @@ const app = async () => {
     lineInterface.on("close", () => {
       logCurrentDirectory();
     });
-    
+
   } catch (error) {
-    console.error("Operation failed:", error);
+    console.error(`Operation failed: ${err}`);
     logCurrentDirectory();
   }
 }
