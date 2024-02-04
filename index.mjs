@@ -9,7 +9,7 @@ import ls from "./src/ls.mjs";
 import cat from "./src/cat.mjs";
 import add from "./src/add.mjs";
 import rename from "./src/rename.mjs";
-
+import copy from "./src/copy.mjs";
 
 const app = async () => {
   try {
@@ -63,6 +63,14 @@ const app = async () => {
                 console.error(`Operation failed: ${error}`);
               }
               break;
+              case "cp":
+                const partsOfLine = line.split(' ');
+                try {
+                 await copy(partsOfLine[1], partsOfLine[2]);
+                } catch (error) {
+                  console.error(`Operation failed: ${error}`);
+                }
+                break;
         case ".exit":
           console.log(`Thank you for using File Manager, ${username}, goodbye!`);
           lineInterface.close();
