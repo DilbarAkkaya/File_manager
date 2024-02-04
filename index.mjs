@@ -5,6 +5,7 @@ import { logCurrentDirectory } from "./src/logCurrentDirectory.mjs";
 import { setHomeDirectory } from "./src/setHomeDirectory.mjs";
 import up from "./src/up.mjs";
 import cd from "./src/cd.mjs";
+import ls from "./src/ls.mjs";
 
 const app = async () => {
   try {
@@ -30,6 +31,9 @@ const app = async () => {
           const inputPath = line.slice(3).trim();
           await cd(inputPath);
           break;
+          case "ls":
+            ls();
+            break;
         case ".exit":
           console.log(`Thank you for using File Manager, ${username}, goodbye!`);
           lineInterface.close();

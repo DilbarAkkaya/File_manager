@@ -1,5 +1,6 @@
 import path from "path";
 import fs from "fs/promises";
+import ls from "./ls.mjs";
 
 const cd = async (inputPath) => {
   if (!inputPath || inputPath.trim().length === 0) {
