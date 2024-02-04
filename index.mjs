@@ -7,6 +7,8 @@ import up from "./src/up.mjs";
 import cd from "./src/cd.mjs";
 import ls from "./src/ls.mjs";
 import cat from "./src/cat.mjs";
+import add from "./src/add.mjs";
+
 
 const app = async () => {
   try {
@@ -43,6 +45,14 @@ const app = async () => {
             console.error(`Operation failed: ${error}`);
           }
           break;
+          case "add":
+            const fileName = line.slice(4).trim();
+            try {
+              await add(fileName);
+            } catch (error) {
+              console.error(`Operation failed: ${error}`);
+            }
+            break;
         case ".exit":
           console.log(`Thank you for using File Manager, ${username}, goodbye!`);
           lineInterface.close();
