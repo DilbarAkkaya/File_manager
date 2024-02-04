@@ -40,7 +40,7 @@ const app = async () => {
           try {
             await cat(input);
           } catch (error) {
-            console.error(`Operation failed: ${err}`);
+            console.error(`Operation failed: ${error}`);
           }
           break;
         case ".exit":
