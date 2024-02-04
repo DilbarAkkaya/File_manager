@@ -12,6 +12,7 @@ import rename from "./src/rename.mjs";
 import copy from "./src/copy.mjs";
 import move from "./src/move.mjs";
 import remove from "./src/remove.mjs";
+import getInfoFromOS from "./src/os.mjs";
 
 const app = async () => {
   try {
@@ -49,45 +50,48 @@ const app = async () => {
             console.error(`Operation failed: ${error}`);
           }
           break;
-          case "add":
-            const fileName = line.slice(4).trim();
-            try {
-              await add(fileName);
-            } catch (error) {
-              console.error(`Operation failed: ${error}`);
-            }
-            break;
-            case "rn":
-              const arrOfArgs = line.split(' ');
-              const newFileName = arrOfArgs[2];
-              try {
-                await rename(arrOfArgs[1], newFileName);
-              } catch (error) {
-                console.error(`Operation failed: ${error}`);
-              }
-              break;
-              case "cp":
-                try {
-                 await copy(partsOfLine[1], partsOfLine[2]);
-                } catch (error) {
-                  console.error(`Operation failed: ${error}`);
-                }
-                break;
-                case "mv":
-                try {
-                 await move(partsOfLine[1], partsOfLine[2]);
-                } catch (error) {
-                  console.error(`Operation failed: ${error}`);
-                }
-                break;
-                case "rm":
-                  const fileToDelete = line.slice(3).trim();
-                try {
-                 await remove(fileToDelete);
-                } catch (error) {
-                  console.error(`Operation failed: ${error}`);
-                }
-                break;
+        case "add":
+          const fileName = line.slice(4).trim();
+          try {
+            await add(fileName);
+          } catch (error) {
+            console.error(`Operation failed: ${error}`);
+          }
+          break;
+        case "rn":
+          const arrOfArgs = line.split(' ');
+          const newFileName = arrOfArgs[2];
+          try {
+            await rename(arrOfArgs[1], newFileName);
+          } catch (error) {
+            console.error(`Operation failed: ${error}`);
+          }
+          break;
+        case "cp":
+          try {
+            await copy(partsOfLine[1], partsOfLine[2]);
+          } catch (error) {
+            console.error(`Operation failed: ${error}`);
+          }
+          break;
+        case "mv":
+          try {
+            await move(partsOfLine[1], partsOfLine[2]);
+          } catch (error) {
+            console.error(`Operation failed: ${error}`);
+          }
+          break;
+        case "rm":
+          const fileToDelete = line.slice(3).trim();
+          try {
+            await remove(fileToDelete);
+          } catch (error) {
+            console.error(`Operation failed: ${error}`);
+          }
+          break;
+        case "os":
+          getInfoFromOS(partsOfLine[1])
+          break;
         case ".exit":
           console.log(`Thank you for using File Manager, ${username}, goodbye!`);
           lineInterface.close();
