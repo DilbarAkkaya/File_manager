@@ -1,7 +1,6 @@
 import fs from 'fs/promises';
 import path from 'path';
 const ls = async () => {
-    //const arrayOfNames = [];
     const arrayOfFiles = [];
     const arrayOfFolders = [];
     try {
@@ -12,15 +11,15 @@ const ls = async () => {
               console.log(file)
               const stats = await fs.stat(path.join((process.cwd(), file.name)));
               if (stats.isDirectory()) {
-                arrayOfFolders.push(file.name)
+                arrayOfFolders.push({'Name': file.name, 'Type': 'directory'})
               } else if (stats.isFile()) {
-                arrayOfFiles.push(file.name)
+                arrayOfFiles.push({'Name': file.name, 'Type': 'file'})
               }
             }
             arrayOfFolders.sort();
             arrayOfFiles.sort();
             const data = [...arrayOfFolders, ...arrayOfFiles]
-            console.table(data);
+            console.table(data, ['Name', 'Type']);
         }
     }
     catch (err) {
