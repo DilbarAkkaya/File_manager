@@ -13,6 +13,7 @@ import copy from "./src/copy.mjs";
 import move from "./src/move.mjs";
 import remove from "./src/remove.mjs";
 import getInfoFromOS from "./src/os.mjs";
+import calculateHash from "./src/hash.mjs";
 
 const app = async () => {
   try {
@@ -91,6 +92,9 @@ const app = async () => {
           break;
         case "os":
           getInfoFromOS(partsOfLine[1])
+          break;
+        case "hash":
+          await calculateHash(partsOfLine[1])
           break;
         case ".exit":
           console.log(`Thank you for using File Manager, ${username}, goodbye!`);
