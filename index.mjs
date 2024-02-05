@@ -14,6 +14,7 @@ import move from "./src/move.mjs";
 import remove from "./src/remove.mjs";
 import getInfoFromOS from "./src/os.mjs";
 import calculateHash from "./src/hash.mjs";
+import compress from "./src/compress.mjs";
 
 const app = async () => {
   try {
@@ -95,6 +96,9 @@ const app = async () => {
           break;
         case "hash":
           await calculateHash(partsOfLine[1])
+          break;
+        case "compress":
+          await compress(partsOfLine[1], partsOfLine[2])
           break;
         case ".exit":
           console.log(`Thank you for using File Manager, ${username}, goodbye!`);
