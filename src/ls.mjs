@@ -23,7 +23,7 @@ const ls = async () => {
         }
     }
     catch (err) {
-        throw new Error(`Operation failed: ${err}`);
+        console.error(`Operation failed: ${err}`);
     }
 };
 export default ls;

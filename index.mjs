@@ -100,9 +100,9 @@ const app = async () => {
         case "compress":
           await compress(partsOfLine[1], partsOfLine[2])
           break;
-          case "decompress":
-            await decompress(partsOfLine[1], partsOfLine[2])
-            break;
+        case "decompress":
+          await decompress(partsOfLine[1], partsOfLine[2])
+          break;
         case ".exit":
           console.log(`Thank you for using File Manager, ${username}, goodbye!`);
           lineInterface.close();

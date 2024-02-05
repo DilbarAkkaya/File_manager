@@ -17,17 +17,16 @@ const decompress = async (filePath, targetPath) => {
       console.error(`${absolutePath} is not a file`);
       return;
     }
-      try {
-        await fs.access(targetFile);
-        console.log(`\x1b[95mFile ${targetFile} in path ${targetDirectory} already exists \x1b[0m`)
-      } catch (err) {
-        if (err.code === 'ENOENT') {
-          const readStream = createReadStream(absolutePath);
-          const writeStream = createWriteStream(targetFile)
-          readStream.pipe(createBrotliDecompress()).pipe(writeStream);
-          console.log(`\x1b[95mFile ${path.basename(absolutePath)} from path ${absolutePath} decomressed to ${targetFile} \x1b[0m`);
-    }
-      
+    try {
+      await fs.access(targetFile);
+      console.log(`\x1b[95mFile ${targetFile} in path ${targetDirectory} already exists \x1b[0m`)
+    } catch (err) {
+      if (err.code === 'ENOENT') {
+        const readStream = createReadStream(absolutePath);
+        const writeStream = createWriteStream(targetFile)
+        readStream.pipe(createBrotliDecompress()).pipe(writeStream);
+        console.log(`\x1b[95mFile ${path.basename(absolutePath)} from path ${absolutePath} decomressed to ${targetFile} \x1b[0m`);
+      }
     }
   } catch (err) {
     console.error(`Operation failed: ${err}`);

@@ -16,28 +16,30 @@ const move = async (filePath, targetDirectory) => {
     } catch (err) {
       const readStream = createReadStream(absoluteFilePath);
       const writeStream = createWriteStream(targetPath);
-      writeStream.on('error', (err) => {
-        console.error('File writing error:', err);
-      });
+    
       readStream.pipe(writeStream);
       await new Promise((resolve, reject) => {
         readStream.on('end', () => {
           console.log(`File ${fileName} moved from ${path.resolve(filePath)} to ${targetPath} successfully `);
           fs.unlink(filePath, (err) => {
             if (err) {
-                console.error('Error deleting source file:', err);
+              console.error(`Operation failed: ${err}`);
             }
         });
           resolve();
         });
         readStream.on('error', (err) => {
-          console.error('File reading error:', err);
+          console.error(`Operation failed: ${err}`);
           reject(err);
+        });
+        writeStream.on('error', (err) => {
+          console.error(`Operation failed: ${err}`);
+          reject(`Operation failed: ${err}`);
         });
       });
     }
   } catch (err) {
-    console.error('Error accessing source file:', err);
+    console.error(`Operation failed: ${err}`);
   }
 };
 
