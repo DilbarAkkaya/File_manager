@@ -21,9 +21,9 @@ const compress = async (filePath, targetPath) => {
     } catch (err) {
       if (err.code === 'ENOENT') {
         const readStream = createReadStream(absolutePath);
-        const writeStream = createWriteStream(targetFile)
+        const writeStream = createWriteStream(`${targetFile}.br`);
         readStream.pipe(createBrotliCompress()).pipe(writeStream);
-        console.log(`\x1b[95mFile ${path.basename(absolutePath)} from path ${filePath} comressed to ${targetFile} \x1b[0m`);
+        console.log(`\x1b[95mFile ${absolutePath} comressed to ${targetFile}.br \x1b[0m`);
       }
     }
   } catch (err) {

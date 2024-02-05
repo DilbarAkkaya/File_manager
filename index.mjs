@@ -15,7 +15,7 @@ import remove from "./src/remove.mjs";
 import getInfoFromOS from "./src/os.mjs";
 import calculateHash from "./src/hash.mjs";
 import compress from "./src/compress.mjs";
-
+import decompress from "./src/decompress.mjs";
 const app = async () => {
   try {
     setHomeDirectory();
@@ -100,6 +100,9 @@ const app = async () => {
         case "compress":
           await compress(partsOfLine[1], partsOfLine[2])
           break;
+          case "decompress":
+            await decompress(partsOfLine[1], partsOfLine[2])
+            break;
         case ".exit":
           console.log(`Thank you for using File Manager, ${username}, goodbye!`);
           lineInterface.close();
