@@ -14,6 +14,9 @@ const getInfoFromOS = (arg) => {
         })
         console.table(arrOfInfo);
       break;
+      case '--homedir':
+        console.log(`\x1b[95mhome directory: ${os.homedir} \x1b[0m`);
+        break;
     default:
       console.log('Invalid input. Please enter a valid command.');
   }
