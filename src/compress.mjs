@@ -15,6 +15,10 @@ const compress = async (filePath, targetPath) => {
       console.error(`${absolutePath} is not a file`);
       return;
     }
+    if (path.extname(absolutePath) === '.br') {
+      console.error(`\x1b[95m$File {absolutePath} is already compressed \x1b[0m`);
+      return;
+    }
     try {
       await fs.access(targetFile);
       console.log(`\x1b[95mFile ${targetFile} in path ${targetDirectory} already exists \x1b[0m`)

@@ -75,5 +75,10 @@ Navigation & working directory operations implemented:
     or into other folder
     decompress c:/users/username/homework\task1/test.br task1/test.txt
 
+    Before decompressing if you have targetfile in your distination folder, please delete it.
+
+    NB! After decompressing of previously compressed file result should not differ with originally compressed file:
+    please check it manually, file after decompressing is same file before compressing (name, extansion, content) 
+
     I believe that other operations do not need to be described.
     THANK YOU! 
