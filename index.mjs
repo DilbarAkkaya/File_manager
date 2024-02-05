@@ -42,7 +42,11 @@ const app = async () => {
           await cd(inputPath);
           break;
         case "ls":
-          await ls();
+          try {
+            await ls();
+          } catch (error) {
+            console.error(`Operation failed: ${error}`);
+          }
           break;
         case "cat":
           const input = line.slice(4).trim();
